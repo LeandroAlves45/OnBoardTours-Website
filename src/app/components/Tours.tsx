@@ -624,7 +624,7 @@ function TourCard({ tour, onClick }: { tour: Tour; onClick: () => void }) {
                 fontFamily: "'Cormorant Garamond', serif",
                 fontSize: "34px",
                 fontWeight: 600,
-                lineHeight: 1,
+                lineHeight: 1.2,
                 background: "linear-gradient(135deg, #00D4E8, #00FFE7)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
