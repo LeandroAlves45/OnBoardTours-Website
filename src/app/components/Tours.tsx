@@ -116,6 +116,21 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
           className="relative h-60 overflow-hidden"
           style={{ background: tour.gradient, borderRadius: "4px 4px 0 0" }}
         >
+          {tour.image && (
+            <img
+              src={tour.image}
+              alt={tour.title}
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ opacity: 0.72 }}
+            />
+          )}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(4,17,30,0.18) 0%, rgba(4,17,30,0.76) 100%)",
+            }}
+          />
           {/* Scan-line pattern overlay */}
           <div
             className="absolute inset-0 opacity-[0.15]"
@@ -488,12 +503,13 @@ function TourCard({ tour, onClick }: { tour: Tour; onClick: () => void }) {
   return (
     <div
       onClick={onClick}
-      className="flex-shrink-0 cursor-pointer rounded overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 group"
+      className="flex-shrink-0 cursor-pointer rounded overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 group"
       style={{
         border: "1px solid rgba(0,212,232,0.15)",
         background: "linear-gradient(160deg, #060F1C 0%, #08192E 100%)",
         boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
         width: "100%",
+        minHeight: "565px",
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLElement).style.boxShadow =
@@ -509,6 +525,21 @@ function TourCard({ tour, onClick }: { tour: Tour; onClick: () => void }) {
         className="relative h-[200px] overflow-hidden"
         style={{ background: tour.gradient }}
       >
+        {tour.image && (
+          <img
+            src={tour.image}
+            alt={tour.title}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            style={{ opacity: 0.78 }}
+          />
+        )}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(4,17,30,0.1) 0%, rgba(4,17,30,0.72) 100%)",
+          }}
+        />
         <div
           className="absolute inset-0 opacity-20"
           style={{
@@ -602,6 +633,7 @@ function TourCard({ tour, onClick }: { tour: Tour; onClick: () => void }) {
             fontSize: "13px",
             color: "rgba(122,155,181,0.8)",
             lineHeight: 1.7,
+            minHeight: "66px",
           }}
         >
           {tour.description}
@@ -867,7 +899,11 @@ export function Tours() {
                     ease: "easeOut",
                     delay: idx * 0.08,
                   }}
-                  style={{ width: `${CARD_WIDTH}px`, flexShrink: 0 }}
+                  style={{
+                    width: `${CARD_WIDTH}px`,
+                    flexShrink: 0,
+                    display: "flex",
+                  }}
                 >
                   <TourCard tour={tour} onClick={() => setSelectedTour(tour)} />
                 </motion.div>
@@ -886,6 +922,7 @@ export function Tours() {
                     duration: isMobile ? 0.32 : 0.55,
                     ease: "easeOut",
                   }}
+                  style={{ display: "flex" }}
                 >
                   <TourCard
                     tour={mobileTour}

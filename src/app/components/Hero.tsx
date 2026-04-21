@@ -26,7 +26,13 @@ export function Hero() {
       alpha: number;
     }[] = [];
 
-    for (let i = 0; i < 55; i++) {
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const particleCount = prefersReducedMotion ? 12 : isMobile ? 28 : 55;
+
+    for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,

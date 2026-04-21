@@ -25,6 +25,7 @@ export interface Tour {
   includes: string[];
   highlights: string[];
   gradient: string;
+  image?: string;
   boatOptions: BoatTourOption[];
 }
 
@@ -49,6 +50,7 @@ export const privateTours: Tour[] = [
       "Flexible departure times",
     ],
     gradient: "linear-gradient(135deg, #0B2D52 0%, #063A5E 50%, #00506A 100%)",
+    image: "/Sunrise.png",
     boatOptions: [
       {
         boatId: "opo-boat-i",
@@ -83,6 +85,7 @@ export const privateTours: Tour[] = [
       "Multi-course river dining",
     ],
     gradient: "linear-gradient(135deg, #0B3D2D 0%, #065E38 50%, #006A3A 100%)",
+    image: "/Food_and_wine_tasting.png",
     boatOptions: [
       {
         boatId: "opo-boat-i",
@@ -117,6 +120,7 @@ export const privateTours: Tour[] = [
       "Perfect for celebrations",
     ],
     gradient: "linear-gradient(135deg, #04111E 0%, #0B2D52 50%, #1A1A4E 100%)",
+    image: "/night_lights.png",
     boatOptions: [
       {
         boatId: "opo-boat-i",
@@ -151,6 +155,7 @@ export const privateTours: Tour[] = [
       "Daytime or sunset options",
     ],
     gradient: "linear-gradient(135deg, #3D0B2D 0%, #5E0644 50%, #6A0050 100%)",
+    image: "/Bachelor_party.png",
     boatOptions: [
       {
         boatId: "opo-boat-i",
@@ -185,6 +190,7 @@ export const privateTours: Tour[] = [
       "Designed for special moments",
     ],
     gradient: "linear-gradient(135deg, #2D0B0B 0%, #5E2306 50%, #6A1000 100%)",
+    image: "/Proposal.png",
     boatOptions: [
       {
         boatId: "opo-boat-i",
@@ -216,6 +222,7 @@ export const sharedTours: Tour[] = [
       "Social atmosphere",
     ],
     gradient: "linear-gradient(135deg, #FF6E7F 0%, #BFE9FF 100%)",
+    image: "/Sunrise.png",
     boatOptions: [
       {
         boatId: "opo-boat-i",
@@ -250,6 +257,7 @@ export const sharedTours: Tour[] = [
       "New friends from around the world",
     ],
     gradient: "linear-gradient(135deg, #0B2D52 0%, #063A5E 50%, #00506A 100%)",
+    image: "/Sunrise.png",
     boatOptions: [
       {
         boatId: "opo-boat-i",
@@ -284,6 +292,7 @@ export const sharedTours: Tour[] = [
       "Expert host guidance",
     ],
     gradient: "linear-gradient(135deg, #2D0B52 0%, #3E0663 50%, #5A006A 100%)",
+    image: "/porto_wine_tasting.png",
     boatOptions: [
       {
         boatId: "opo-boat-i",
@@ -318,6 +327,7 @@ export const sharedTours: Tour[] = [
       "Small-group experience",
     ],
     gradient: "linear-gradient(135deg, #04111E 0%, #0B2D52 50%, #1A1A4E 100%)",
+    image: "/night_lights.png",
     boatOptions: [
       {
         boatId: "opo-boat-i",
@@ -352,6 +362,7 @@ export const sharedTours: Tour[] = [
       "Social tasting experience",
     ],
     gradient: "linear-gradient(135deg, #0B3D2D 0%, #065E38 50%, #006A3A 100%)",
+    image: "/Food_and_wine_tasting.png",
     boatOptions: [
       {
         boatId: "opo-boat-i",
