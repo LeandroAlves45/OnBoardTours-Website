@@ -54,13 +54,13 @@ export const privateTours: Tour[] = [
     image: "/Sunrise.png",
     boatOptions: [
       {
-        boatId: "opo-boat-i",
+        boatId: "on-nautic-i",
         price: 349,
         priceUnit: "per boat",
         capacity: "Up to 8 guests",
       },
       {
-        boatId: "opo-boat-ii",
+        boatId: "on-nautic-ii",
         price: 449,
         priceUnit: "per boat",
         capacity: "Up to 10 guests",
@@ -89,13 +89,13 @@ export const privateTours: Tour[] = [
     image: "/Food_and_wine_tasting.png",
     boatOptions: [
       {
-        boatId: "opo-boat-i",
+        boatId: "on-nautic-i",
         price: 349,
         priceUnit: "per boat",
         capacity: "Up to 8 guests",
       },
       {
-        boatId: "opo-boat-ii",
+        boatId: "on-nautic-ii",
         price: 449,
         priceUnit: "per boat",
         capacity: "Up to 10 guests",
@@ -124,13 +124,13 @@ export const privateTours: Tour[] = [
     image: "/night_lights.png",
     boatOptions: [
       {
-        boatId: "opo-boat-i",
+        boatId: "on-nautic-i",
         price: 349,
         priceUnit: "per boat",
         capacity: "Up to 8 guests",
       },
       {
-        boatId: "opo-boat-ii",
+        boatId: "on-nautic-ii",
         price: 449,
         priceUnit: "per boat",
         capacity: "Up to 10 guests",
@@ -159,13 +159,13 @@ export const privateTours: Tour[] = [
     image: "/Bachelor_party.png",
     boatOptions: [
       {
-        boatId: "opo-boat-i",
+        boatId: "on-nautic-i",
         price: 399,
         priceUnit: "per boat",
         capacity: "Up to 8 guests",
       },
       {
-        boatId: "opo-boat-ii",
+        boatId: "on-nautic-ii",
         price: 499,
         priceUnit: "per boat",
         capacity: "Up to 10 guests",
@@ -194,13 +194,13 @@ export const privateTours: Tour[] = [
     image: "/Proposal.png",
     boatOptions: [
       {
-        boatId: "opo-boat-i",
+        boatId: "on-nautic-i",
         price: 499,
         priceUnit: "starting price",
         capacity: "Up to 8 guests",
       },
       {
-        boatId: "opo-boat-ii",
+        boatId: "on-nautic-ii",
         price: 599,
         priceUnit: "starting price",
         capacity: "Up to 10 guests",
@@ -226,13 +226,13 @@ export const sharedTours: Tour[] = [
     image: "/Sunrise.png",
     boatOptions: [
       {
-        boatId: "opo-boat-i",
+        boatId: "on-nautic-i",
         price: 49,
         priceUnit: "per person",
         capacity: "Up to 8 guests",
       },
       {
-        boatId: "opo-boat-ii",
+        boatId: "on-nautic-ii",
         price: 59,
         priceUnit: "per person",
         capacity: "Up to 10 guests",
@@ -261,13 +261,13 @@ export const sharedTours: Tour[] = [
     image: "/Sunrise.png",
     boatOptions: [
       {
-        boatId: "opo-boat-i",
+        boatId: "on-nautic-i",
         price: 49,
         priceUnit: "per person",
         capacity: "Up to 8 guests",
       },
       {
-        boatId: "opo-boat-ii",
+        boatId: "on-nautic-ii",
         price: 59,
         priceUnit: "per person",
         capacity: "Up to 10 guests",
@@ -296,13 +296,13 @@ export const sharedTours: Tour[] = [
     image: "/porto_wine_tasting.png",
     boatOptions: [
       {
-        boatId: "opo-boat-i",
+        boatId: "on-nautic-i",
         price: 49,
         priceUnit: "per person",
         capacity: "Up to 8 guests",
       },
       {
-        boatId: "opo-boat-ii",
+        boatId: "on-nautic-ii",
         price: 59,
         priceUnit: "per person",
         capacity: "Up to 10 guests",
@@ -331,13 +331,13 @@ export const sharedTours: Tour[] = [
     image: "/night_lights.png",
     boatOptions: [
       {
-        boatId: "opo-boat-i",
+        boatId: "on-nautic-i",
         price: 69,
         priceUnit: "per person",
         capacity: "Up to 8 guests",
       },
       {
-        boatId: "opo-boat-ii",
+        boatId: "on-nautic-ii",
         price: 79,
         priceUnit: "per person",
         capacity: "Up to 10 guests",
@@ -366,13 +366,13 @@ export const sharedTours: Tour[] = [
     image: "/Food_and_wine_tasting.png",
     boatOptions: [
       {
-        boatId: "opo-boat-i",
+        boatId: "on-nautic-i",
         price: 89,
         priceUnit: "per person",
         capacity: "Up to 8 guests",
       },
       {
-        boatId: "opo-boat-ii",
+        boatId: "on-nautic-ii",
         price: 99,
         priceUnit: "per person",
         capacity: "Up to 10 guests",
@@ -406,13 +406,13 @@ export const premiumTours: Tour[] = [
     image: "/OnBoatTours.png",
     boatOptions: [
       {
-        boatId: "opo-boat-i",
+        boatId: "on-nautic-i",
         priceLabel: "Contact us",
         priceUnit: "tailor-made experience",
         capacity: "Up to 8 guests",
       },
       {
-        boatId: "opo-boat-ii",
+        boatId: "on-nautic-ii",
         priceLabel: "Contact us",
         priceUnit: "tailor-made experience",
         capacity: "Up to 10 guests",

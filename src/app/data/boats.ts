@@ -3,7 +3,7 @@
 
 export interface Boat {
   // ID estável usado para ligar barcos às opções de preço das tours.
-  id: "opo-boat-i" | "opo-boat-ii";
+  id: "on-nautic-i" | "on-nautic-ii";
   name: string;
   model: string;
   capacity: number;
@@ -14,8 +14,8 @@ export interface Boat {
 
 export const boats: Boat[] = [
   {
-    id: "opo-boat-i",
-    name: "OPO Boat I",
+    id: "on-nautic-i",
+    name: "On Nautic Tour Boat I",
     model: "Bayliner Ciera 2655",
     capacity: 8,
     crew: 2,
@@ -23,8 +23,8 @@ export const boats: Boat[] = [
     image: "/OPO_Boat_I_Bayliner_Ciera_2655.png",
   },
   {
-    id: "opo-boat-ii",
-    name: "OPO Boat II",
+    id: "on-nautic-ii",
+    name: "On Nautic Tour Boat II",
     model: "Sessa Marina C35",
     capacity: 10,
     crew: 2,

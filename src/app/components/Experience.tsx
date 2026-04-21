@@ -13,7 +13,7 @@ export function Experience() {
     {
       number: '02',
       title: 'Meet at Gate C',
-      description: 'Find us at Gate C, R. da Praia 554 in Vila Nova de Gaia. Look for the Opo Boat Tours flag.',
+      description: 'Find us at Gate C, R. da Praia 554 in Vila Nova de Gaia. Look for the On Nautic Tour flag.',
       icon: '📍',
     },
     {

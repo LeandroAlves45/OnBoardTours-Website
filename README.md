@@ -1,6 +1,6 @@
-# Opo Boat Tours Website
+# On Nautic Tour Website
 
-A premium, responsive website for Opo Boat Tours, designed to showcase private and shared Douro River experiences in Porto. The project is built with React, Vite, Tailwind CSS, and Motion, with a strong focus on elegant visual presentation, smooth interactions, and conversion-oriented calls to action.
+A premium, responsive website for On Nautic Tour, designed to showcase private and shared Douro River experiences in Porto. The project is built with React, Vite, Tailwind CSS, and Motion, with a strong focus on elegant visual presentation, smooth interactions, and conversion-oriented calls to action.
 
 ## Overview
 
@@ -169,4 +169,4 @@ Keep `package-lock.json` committed to ensure consistent dependency installs.
 
 ## Attribution
 
-This project began as a Figma code export for the Opo Boat Tours website concept and was adapted into a React/Vite implementation.
+This project began as a Figma code export for the On Nautic Tour website concept and was adapted into a React/Vite implementation.

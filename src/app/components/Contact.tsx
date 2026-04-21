@@ -47,7 +47,7 @@ export function Contact() {
     {
       icon: Mail,
       label: 'Email',
-      value: 'info@opoboattours.com',
+      value: 'info@onnautictour.com',
     },
   ];
 

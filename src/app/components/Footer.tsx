@@ -24,12 +24,12 @@ export function Footer() {
               <Anchor size={12} style={{ color: '#fff' }} />
             </div>
             <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: '15px', letterSpacing: '-0.02em' }}>
-              <span style={{ color: '#FFFFFF' }}>Opo</span>
+              <span style={{ color: '#FFFFFF' }}>On</span>
               <span style={{
                 background: 'linear-gradient(90deg, #00D4E8, #00FFE7)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-              }}> Boat </span>
-              <span style={{ color: '#FFFFFF' }}>Tours</span>
+              }}> Nautic </span>
+              <span style={{ color: '#FFFFFF' }}>Tour</span>
             </span>
           </div>
 
@@ -43,7 +43,7 @@ export function Footer() {
               onMouseEnter={(e) => (e.currentTarget.style.color = '#00D4E8')}
               onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(122,155,181,0.6)')}
             >
-              © 2026 Opo Boat Tours
+              © 2026 On Nautic Tour
             </a>
             <span style={{ color: 'rgba(0,212,232,0.2)' }}>•</span>
             <a href="#" style={{
