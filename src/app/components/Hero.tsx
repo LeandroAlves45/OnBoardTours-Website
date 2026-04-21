@@ -226,9 +226,9 @@ export function Hero() {
           </div>
           <div
             style={{
-              fontSize: "clamp(52px, 9vw, 96px)",
+              fontSize: "clamp(44px, 14vw, 96px)",
               fontWeight: 300,
-              letterSpacing: "-0.02em",
+              letterSpacing: "0",
             }}
           >
             <span style={{ color: "rgba(255,255,255,0.5)" }}>from the </span>

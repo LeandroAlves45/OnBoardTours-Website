@@ -1,6 +1,7 @@
 import { MapPin, Clock, Mail, MessageCircle, Map, Calendar, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { ReactNode } from 'react';
+import { useIsMobile } from './ui/use-mobile';
 
 function Reveal({
   children,
@@ -11,13 +12,18 @@ function Reveal({
   delay?: number;
   className?: string;
 }) {
+  const isMobile = useIsMobile();
+  const revealDistance = isMobile ? 18 : 36;
+  const revealDuration = isMobile ? 0.38 : 0.65;
+  const revealDelay = isMobile ? Math.min(delay, 0.04) : delay;
+
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 36 }}
+      initial={{ opacity: 0, y: revealDistance }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.22 }}
-      transition={{ duration: 0.65, ease: 'easeOut', delay }}
+      viewport={{ once: true, amount: isMobile ? 0.12 : 0.22 }}
+      transition={{ duration: revealDuration, ease: 'easeOut', delay: revealDelay }}
     >
       {children}
     </motion.div>
@@ -25,6 +31,8 @@ function Reveal({
 }
 
 export function Contact() {
+  const isMobile = useIsMobile();
+
   const contactInfo = [
     {
       icon: MapPin,
@@ -177,10 +185,14 @@ export function Contact() {
                 <motion.button
                   key={idx}
                   className="w-full p-6 rounded flex items-center justify-between transition-all group hover:-translate-y-1"
-                  initial={{ opacity: 0, y: 36 }}
+                  initial={{ opacity: 0, y: isMobile ? 18 : 36 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.22 }}
-                  transition={{ duration: 0.55, ease: 'easeOut', delay: 0.12 + idx * 0.08 }}
+                  viewport={{ once: true, amount: isMobile ? 0.12 : 0.22 }}
+                  transition={{
+                    duration: isMobile ? 0.32 : 0.55,
+                    ease: 'easeOut',
+                    delay: isMobile ? Math.min(idx * 0.03, 0.06) : 0.12 + idx * 0.08,
+                  }}
                   style={{
                     background: `linear-gradient(135deg, ${button.bgColor}, transparent)`,
                     border: `1px solid ${button.borderColor}`,

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Anchor } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
+import { useIsMobile } from './ui/use-mobile';
 
 export function Navigation() {
+  const isMobile = useIsMobile();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -25,9 +27,9 @@ export function Navigation() {
   return (
     <motion.nav
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-      initial={{ opacity: 0, y: -18 }}
+      initial={{ opacity: 0, y: isMobile ? -10 : -18 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.55, ease: 'easeOut' }}
+      transition={{ duration: isMobile ? 0.28 : 0.55, ease: 'easeOut' }}
       style={{
         background: scrolled
           ? 'rgba(4, 17, 30, 0.92)'
@@ -111,7 +113,7 @@ export function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
             style={{
               background: 'rgba(4, 17, 30, 0.97)',
               backdropFilter: 'blur(20px)',
@@ -126,7 +128,7 @@ export function Navigation() {
                   className="uppercase tracking-[0.12em] text-left transition-colors hover:text-[#00D4E8]"
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, ease: 'easeOut', delay: idx * 0.04 }}
+                  transition={{ duration: 0.2, ease: 'easeOut', delay: idx * 0.025 }}
                   style={{
                     fontFamily: "'Space Grotesk', sans-serif",
                     fontSize: '12px',
@@ -144,7 +146,7 @@ export function Navigation() {
                 className="px-6 py-3 rounded-sm w-full transition-all hover:shadow-[0_0_20px_rgba(0,212,232,0.35)]"
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, ease: 'easeOut', delay: navLinks.length * 0.04 }}
+                transition={{ duration: 0.2, ease: 'easeOut', delay: navLinks.length * 0.025 }}
                 style={{
                   background: 'linear-gradient(135deg, #00D4E8, #0098AA)',
                   color: '#04111E',

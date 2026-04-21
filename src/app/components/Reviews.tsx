@@ -1,6 +1,7 @@
 import { Star, Quote } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { ReactNode } from 'react';
+import { useIsMobile } from './ui/use-mobile';
 
 const reviews = [
   {
@@ -41,13 +42,18 @@ function Reveal({
   delay?: number;
   className?: string;
 }) {
+  const isMobile = useIsMobile();
+  const revealDistance = isMobile ? 18 : 36;
+  const revealDuration = isMobile ? 0.38 : 0.65;
+  const revealDelay = isMobile ? Math.min(delay, 0.04) : delay;
+
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 36 }}
+      initial={{ opacity: 0, y: revealDistance }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.22 }}
-      transition={{ duration: 0.65, ease: 'easeOut', delay }}
+      viewport={{ once: true, amount: isMobile ? 0.12 : 0.22 }}
+      transition={{ duration: revealDuration, ease: 'easeOut', delay: revealDelay }}
     >
       {children}
     </motion.div>
@@ -55,6 +61,8 @@ function Reveal({
 }
 
 export function Reviews() {
+  const isMobile = useIsMobile();
+
   return (
     <section
       id="reviews"
@@ -104,10 +112,14 @@ export function Reviews() {
             <motion.div
               key={platform.name}
               className="relative overflow-hidden rounded p-8 text-center transition-all hover:-translate-y-1 group"
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: isMobile ? 18 : 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.55, ease: 'easeOut', delay: idx * 0.08 }}
+              viewport={{ once: true, amount: isMobile ? 0.12 : 0.2 }}
+              transition={{
+                duration: isMobile ? 0.32 : 0.55,
+                ease: 'easeOut',
+                delay: isMobile ? Math.min(idx * 0.03, 0.06) : idx * 0.08,
+              }}
               style={{
                 background: 'linear-gradient(160deg, #04111E 0%, #071830 100%)',
                 border: '1px solid rgba(0,212,232,0.12)',
@@ -171,10 +183,14 @@ export function Reviews() {
             <motion.div
               key={idx}
               className="relative rounded p-7 transition-all hover:-translate-y-1"
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: isMobile ? 18 : 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.55, ease: 'easeOut', delay: idx * 0.08 }}
+              viewport={{ once: true, amount: isMobile ? 0.12 : 0.2 }}
+              transition={{
+                duration: isMobile ? 0.32 : 0.55,
+                ease: 'easeOut',
+                delay: isMobile ? Math.min(idx * 0.03, 0.06) : idx * 0.08,
+              }}
               style={{
                 background: 'linear-gradient(160deg, rgba(11,45,82,0.04) 0%, rgba(0,212,232,0.03) 100%)',
                 border: '1px solid rgba(0,212,232,0.12)',
