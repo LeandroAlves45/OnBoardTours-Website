@@ -403,7 +403,7 @@ export const premiumTours: Tour[] = [
       "Ideal for special occasions",
     ],
     gradient: "linear-gradient(135deg, #04111E 0%, #0B2D52 55%, #C9A84C 140%)",
-    image: "/On_Nautic_Tour.png",
+    image: "/On_Nautic_Tour.jpg",
     boatOptions: [
       {
         boatId: "on-nautic-i",
