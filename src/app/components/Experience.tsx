@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import type { ReactNode } from 'react';
+import { useIsMobile } from './ui/use-mobile';
 
 export function Experience() {
   const steps = [
@@ -32,13 +33,18 @@ export function Experience() {
     delay?: number;
     className?: string;
   }) {
+    const isMobile = useIsMobile();
+    const revealDistance = isMobile ? 18 : 36;
+    const revealDuration = isMobile ? 0.38 : 0.65;
+    const revealDelay = isMobile ? Math.min(delay, 0.04) : delay;
+
     return (
       <motion.div
         className={className}
-        initial={{ opacity: 0, y: 36 }}
+        initial={{ opacity: 0, y: revealDistance }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.22 }}
-        transition={{ duration: 0.65, ease: 'easeOut', delay }}
+        viewport={{ once: true, amount: isMobile ? 0.12 : 0.22 }}
+        transition={{ duration: revealDuration, ease: 'easeOut', delay: revealDelay }}
       >
         {children}
       </motion.div>

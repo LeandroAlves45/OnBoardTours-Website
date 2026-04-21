@@ -47,6 +47,8 @@ function Reveal({
 }
 
 function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
+  const isMobile = useIsMobile();
+
   // Busca os barcos disponíveis para a tour selecionada.
   const availableBoats = boats.filter((boat) =>
     tour.boatOptions.some((option) => option.boatId === boat.id),
@@ -85,7 +87,7 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
       initial={{ background: "rgba(4,17,30,0)" }}
       animate={{ background: "rgba(4,17,30,0.88)" }}
       exit={{ background: "rgba(4,17,30,0)" }}
-      transition={{ duration: 0.35 }}
+      transition={{ duration: isMobile ? 0.18 : 0.35 }}
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <motion.div
@@ -103,8 +105,11 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
         }}
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 24, scale: 0.97 }}
-        transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+        exit={{ opacity: 0, y: isMobile ? 12 : 24, scale: 0.97 }}
+        transition={{
+          duration: isMobile ? 0.22 : 0.4,
+          ease: isMobile ? "easeOut" : [0.34, 1.56, 0.64, 1],
+        }}
       >
         {/* Header gradient band */}
         <div
