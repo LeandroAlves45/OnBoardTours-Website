@@ -43,9 +43,9 @@ function Reveal({
   className?: string;
 }) {
   const isMobile = useIsMobile();
-  const revealDistance = isMobile ? 18 : 36;
-  const revealDuration = isMobile ? 0.38 : 0.65;
-  const revealDelay = isMobile ? Math.min(delay, 0.04) : delay;
+  const revealDistance = isMobile ? 12 : 36;
+  const revealDuration = isMobile ? 0.28 : 0.65;
+  const revealDelay = isMobile ? Math.min(delay, 0.02) : delay;
 
   return (
     <motion.div
@@ -112,13 +112,13 @@ export function Reviews() {
             <motion.div
               key={platform.name}
               className="relative overflow-hidden rounded p-8 text-center transition-all hover:-translate-y-1 group"
-              initial={{ opacity: 0, y: isMobile ? 18 : 40 }}
+              initial={{ opacity: 0, y: isMobile ? 12 : 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: isMobile ? 0.12 : 0.2 }}
               transition={{
-                duration: isMobile ? 0.32 : 0.55,
+                duration: isMobile ? 0.24 : 0.55,
                 ease: 'easeOut',
-                delay: isMobile ? Math.min(idx * 0.03, 0.06) : idx * 0.08,
+                delay: isMobile ? Math.min(idx * 0.02, 0.04) : idx * 0.08,
               }}
               style={{
                 background: 'linear-gradient(160deg, #04111E 0%, #071830 100%)',
@@ -183,13 +183,13 @@ export function Reviews() {
             <motion.div
               key={idx}
               className="relative rounded p-7 transition-all hover:-translate-y-1"
-              initial={{ opacity: 0, y: isMobile ? 18 : 40 }}
+              initial={{ opacity: 0, y: isMobile ? 12 : 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: isMobile ? 0.12 : 0.2 }}
               transition={{
-                duration: isMobile ? 0.32 : 0.55,
+                duration: isMobile ? 0.24 : 0.55,
                 ease: 'easeOut',
-                delay: isMobile ? Math.min(idx * 0.03, 0.06) : idx * 0.08,
+                delay: isMobile ? Math.min(idx * 0.02, 0.04) : idx * 0.08,
               }}
               style={{
                 background: 'linear-gradient(160deg, rgba(11,45,82,0.04) 0%, rgba(0,212,232,0.03) 100%)',

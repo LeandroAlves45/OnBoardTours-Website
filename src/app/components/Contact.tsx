@@ -13,9 +13,9 @@ function Reveal({
   className?: string;
 }) {
   const isMobile = useIsMobile();
-  const revealDistance = isMobile ? 18 : 36;
-  const revealDuration = isMobile ? 0.38 : 0.65;
-  const revealDelay = isMobile ? Math.min(delay, 0.04) : delay;
+  const revealDistance = isMobile ? 12 : 36;
+  const revealDuration = isMobile ? 0.28 : 0.65;
+  const revealDelay = isMobile ? Math.min(delay, 0.02) : delay;
 
   return (
     <motion.div
@@ -185,13 +185,13 @@ export function Contact() {
                 <motion.button
                   key={idx}
                   className="w-full p-6 rounded flex items-center justify-between transition-all group hover:-translate-y-1"
-                  initial={{ opacity: 0, y: isMobile ? 18 : 36 }}
+                  initial={{ opacity: 0, y: isMobile ? 12 : 36 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: isMobile ? 0.12 : 0.22 }}
                   transition={{
-                    duration: isMobile ? 0.32 : 0.55,
+                    duration: isMobile ? 0.24 : 0.55,
                     ease: 'easeOut',
-                    delay: isMobile ? Math.min(idx * 0.03, 0.06) : 0.12 + idx * 0.08,
+                    delay: isMobile ? Math.min(idx * 0.02, 0.04) : 0.12 + idx * 0.08,
                   }}
                   style={{
                     background: `linear-gradient(135deg, ${button.bgColor}, transparent)`,

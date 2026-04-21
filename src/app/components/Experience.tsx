@@ -34,9 +34,9 @@ export function Experience() {
     className?: string;
   }) {
     const isMobile = useIsMobile();
-    const revealDistance = isMobile ? 18 : 36;
-    const revealDuration = isMobile ? 0.38 : 0.65;
-    const revealDelay = isMobile ? Math.min(delay, 0.04) : delay;
+    const revealDistance = isMobile ? 12 : 36;
+    const revealDuration = isMobile ? 0.28 : 0.65;
+    const revealDelay = isMobile ? Math.min(delay, 0.02) : delay;
 
     return (
       <motion.div
