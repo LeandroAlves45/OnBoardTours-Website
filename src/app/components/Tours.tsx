@@ -11,7 +11,12 @@ import {
 } from "lucide-react";
 import { boats } from "../data/boats";
 import { BoatSelector } from "./BoatSelector";
-import { privateTours, sharedTours, type Tour } from "../data/tours";
+import {
+  premiumTours,
+  privateTours,
+  sharedTours,
+  type Tour,
+} from "../data/tours";
 import { useIsMobile } from "./ui/use-mobile";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -61,7 +66,12 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
     (option) => option.boatId === selectedBoatId,
   );
 
-  const finalPrice = selectedBoatOption?.price ?? 0;
+  const finalPrice =
+    selectedBoatOption?.price !== undefined
+      ? `€${selectedBoatOption.price}`
+      : selectedBoatOption?.priceLabel ??
+        tour.boatOptions[0]?.priceLabel ??
+        "Contact us";
   const finalPriceUnit =
     selectedBoatOption?.priceUnit ?? tour.boatOptions[0]?.priceUnit ?? "";
   const finalCapacity =
@@ -460,7 +470,7 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
                   WebkitTextFillColor: "transparent",
                 }}
               >
-                €{finalPrice}
+                {finalPrice}
               </div>
               <div
                 style={{
@@ -497,8 +507,13 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
 }
 
 function TourCard({ tour, onClick }: { tour: Tour; onClick: () => void }) {
-  const prices = tour.boatOptions.map((option) => option.price);
-  const lowestPrice = prices.length > 0 ? Math.min(...prices) : 0;
+  const prices = tour.boatOptions
+    .map((option) => option.price)
+    .filter((price): price is number => typeof price === "number");
+  const lowestPrice =
+    prices.length > 0
+      ? `€${Math.min(...prices)}`
+      : tour.boatOptions[0]?.priceLabel ?? "Contact us";
 
   return (
     <div
@@ -667,7 +682,7 @@ function TourCard({ tour, onClick }: { tour: Tour; onClick: () => void }) {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              €{lowestPrice}
+              {lowestPrice}
             </div>
           </div>
           <button
@@ -703,12 +718,20 @@ function TourCard({ tour, onClick }: { tour: Tour; onClick: () => void }) {
 
 export function Tours() {
   const isMobile = useIsMobile();
-  const [activeTab, setActiveTab] = useState<"private" | "shared">("private");
+  const [activeTab, setActiveTab] = useState<
+    "private" | "shared" | "premium"
+  >("private");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedTour, setSelectedTour] = useState<Tour | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  const tours = activeTab === "private" ? privateTours : sharedTours;
+  const tours =
+    activeTab === "private"
+      ? privateTours
+      : activeTab === "shared"
+        ? sharedTours
+        : premiumTours;
+  const isPremiumTab = activeTab === "premium";
   const CARD_WIDTH = 360; // Width de cada card, incluindo margin
   const CARD_GAP = 24; // Gap entre cards
   const CARDS_VISIBLE = { sm: 1, md: 2, lg: 4 }; // Número de cards visíveis por breakpoint
@@ -820,7 +843,7 @@ export function Tours() {
               border: "1px solid rgba(0,212,232,0.2)",
             }}
           >
-            {(["private", "shared"] as const).map((tab) => (
+            {(["private", "shared", "premium"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -851,152 +874,182 @@ export function Tours() {
 
         {/* Carousel */}
         <Reveal className="relative" delay={0.12}>
-          {/* Navigation buttons */}
-          <button
-            onClick={prev}
-            disabled={desktopIndex === 0}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 -translate-x-5 w-11 h-11 rounded-full items-center justify-center transition-all hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed hidden lg:flex"
-            style={{
-              background: "linear-gradient(135deg, #0B2D52, #071830)",
-              border: "1px solid rgba(0,212,232,0.3)",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
-              cursor: desktopIndex === 0 ? "not-allowed" : "pointer",
-            }}
-          >
-            <ChevronLeft size={20} style={{ color: "#00D4E8" }} />
-          </button>
-
-          <button
-            onClick={nextDesktop}
-            disabled={desktopIndex >= desktopMaxIndex}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 translate-x-5 w-11 h-11 rounded-full items-center justify-center transition-all hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed hidden lg:flex"
-            style={{
-              background: "linear-gradient(135deg, #0B2D52, #071830)",
-              border: "1px solid rgba(0,212,232,0.3)",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
-              cursor:
-                desktopIndex >= desktopMaxIndex ? "not-allowed" : "pointer",
-            }}
-          >
-            <ChevronRight size={20} style={{ color: "#00D4E8" }} />
-          </button>
-
-          {/* Cards container */}
-          <div className="overflow-hidden" ref={carouselRef}>
-            {/* Desktop: sliding carousel */}
-            <div
-              className="hidden lg:flex gap-6 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
-              style={{ transform: `translateX(${translateX}px)` }}
-            >
-              {tours.map((tour, idx) => (
+          {isPremiumTab ? (
+            <div className="max-w-[520px] mx-auto">
+              {tours[0] && (
                 <motion.div
-                  key={idx}
+                  key={tours[0].title}
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{
                     duration: 0.55,
                     ease: "easeOut",
-                    delay: idx * 0.08,
-                  }}
-                  style={{
-                    width: `${CARD_WIDTH}px`,
-                    flexShrink: 0,
-                    display: "flex",
-                  }}
-                >
-                  <TourCard tour={tour} onClick={() => setSelectedTour(tour)} />
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Mobile/tablet: single-card carousel */}
-            <div className="lg:hidden">
-              {mobileTour && (
-                <motion.div
-                  key={`${activeTab}-${currentIndex}`}
-                  initial={{ opacity: 0, y: isMobile ? 18 : 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: isMobile ? 0.12 : 0.2 }}
-                  transition={{
-                    duration: isMobile ? 0.32 : 0.55,
-                    ease: "easeOut",
                   }}
                   style={{ display: "flex" }}
                 >
                   <TourCard
-                    tour={mobileTour}
-                    onClick={() => setSelectedTour(mobileTour)}
+                    tour={tours[0]}
+                    onClick={() => setSelectedTour(tours[0])}
                   />
                 </motion.div>
               )}
             </div>
-          </div>
+          ) : (
+            <>
+              {/* Navigation buttons */}
+              <button
+                onClick={prev}
+                disabled={desktopIndex === 0}
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-20 -translate-x-5 w-11 h-11 rounded-full items-center justify-center transition-all hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed hidden lg:flex"
+                style={{
+                  background: "linear-gradient(135deg, #0B2D52, #071830)",
+                  border: "1px solid rgba(0,212,232,0.3)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+                  cursor: desktopIndex === 0 ? "not-allowed" : "pointer",
+                }}
+              >
+                <ChevronLeft size={20} style={{ color: "#00D4E8" }} />
+              </button>
 
-          {/* Dots */}
-          {tours.length > CARDS_VISIBLE.lg && (
-            <div className="hidden lg:flex justify-center gap-2 mt-8">
-              {Array.from({ length: desktopMaxIndex + 1 }).map((_, i) => (
+              <button
+                onClick={nextDesktop}
+                disabled={desktopIndex >= desktopMaxIndex}
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-20 translate-x-5 w-11 h-11 rounded-full items-center justify-center transition-all hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed hidden lg:flex"
+                style={{
+                  background: "linear-gradient(135deg, #0B2D52, #071830)",
+                  border: "1px solid rgba(0,212,232,0.3)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+                  cursor:
+                    desktopIndex >= desktopMaxIndex ? "not-allowed" : "pointer",
+                }}
+              >
+                <ChevronRight size={20} style={{ color: "#00D4E8" }} />
+              </button>
+
+              {/* Cards container */}
+              <div className="overflow-hidden" ref={carouselRef}>
+                {/* Desktop: sliding carousel */}
+                <div
+                  className="hidden lg:flex gap-6 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+                  style={{ transform: `translateX(${translateX}px)` }}
+                >
+                  {tours.map((tour, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 40 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{
+                        duration: 0.55,
+                        ease: "easeOut",
+                        delay: idx * 0.08,
+                      }}
+                      style={{
+                        width: `${CARD_WIDTH}px`,
+                        flexShrink: 0,
+                        display: "flex",
+                      }}
+                    >
+                      <TourCard
+                        tour={tour}
+                        onClick={() => setSelectedTour(tour)}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Mobile/tablet: single-card carousel */}
+                <div className="lg:hidden">
+                  {mobileTour && (
+                    <motion.div
+                      key={`${activeTab}-${currentIndex}`}
+                      initial={{ opacity: 0, y: isMobile ? 18 : 40 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: isMobile ? 0.12 : 0.2 }}
+                      transition={{
+                        duration: isMobile ? 0.32 : 0.55,
+                        ease: "easeOut",
+                      }}
+                      style={{ display: "flex" }}
+                    >
+                      <TourCard
+                        tour={mobileTour}
+                        onClick={() => setSelectedTour(mobileTour)}
+                      />
+                    </motion.div>
+                  )}
+                </div>
+              </div>
+
+              {/* Dots */}
+              {tours.length > CARDS_VISIBLE.lg && (
+                <div className="hidden lg:flex justify-center gap-2 mt-8">
+                  {Array.from({ length: desktopMaxIndex + 1 }).map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentIndex(i)}
+                      className="transition-all duration-300"
+                      style={{
+                        width: desktopIndex === i ? "24px" : "8px",
+                        height: "8px",
+                        borderRadius: "4px",
+                        background:
+                          desktopIndex === i
+                            ? "linear-gradient(90deg, #00D4E8, #00FFE7)"
+                            : "rgba(0,212,232,0.25)",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* Mobile nav buttons */}
+              <div className="lg:hidden flex items-center justify-center gap-4 mt-8">
                 <button
-                  key={i}
-                  onClick={() => setCurrentIndex(i)}
-                  className="transition-all duration-300"
+                  onClick={prev}
+                  disabled={currentIndex === 0}
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110 disabled:opacity-30"
                   style={{
-                    width: desktopIndex === i ? "24px" : "8px",
-                    height: "8px",
-                    borderRadius: "4px",
-                    background:
-                      desktopIndex === i
-                        ? "linear-gradient(90deg, #00D4E8, #00FFE7)"
-                        : "rgba(0,212,232,0.25)",
-                    border: "none",
-                    cursor: "pointer",
+                    background: "linear-gradient(135deg, #0B2D52, #071830)",
+                    border: "1px solid rgba(0,212,232,0.3)",
+                    cursor: currentIndex === 0 ? "not-allowed" : "pointer",
                   }}
-                />
-              ))}
-            </div>
+                >
+                  <ChevronLeft size={18} style={{ color: "#00D4E8" }} />
+                </button>
+                <span
+                  style={{
+                    fontFamily: "'Space Grotesk', sans-serif",
+                    fontSize: "12px",
+                    fontWeight: 700,
+                    color: "#0B2D52",
+                    minWidth: "48px",
+                    textAlign: "center",
+                  }}
+                >
+                  {currentIndex + 1} / {tours.length}
+                </span>
+                <button
+                  onClick={nextMobile}
+                  disabled={currentIndex >= mobileMaxIndex}
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110 disabled:opacity-30"
+                  style={{
+                    background: "linear-gradient(135deg, #0B2D52, #071830)",
+                    border: "1px solid rgba(0,212,232,0.3)",
+                    cursor:
+                      currentIndex >= mobileMaxIndex
+                        ? "not-allowed"
+                        : "pointer",
+                  }}
+                >
+                  <ChevronRight size={18} style={{ color: "#00D4E8" }} />
+                </button>
+              </div>
+            </>
           )}
-
-          {/* Mobile nav buttons */}
-          <div className="lg:hidden flex items-center justify-center gap-4 mt-8">
-            <button
-              onClick={prev}
-              disabled={currentIndex === 0}
-              className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110 disabled:opacity-30"
-              style={{
-                background: "linear-gradient(135deg, #0B2D52, #071830)",
-                border: "1px solid rgba(0,212,232,0.3)",
-                cursor: currentIndex === 0 ? "not-allowed" : "pointer",
-              }}
-            >
-              <ChevronLeft size={18} style={{ color: "#00D4E8" }} />
-            </button>
-            <span
-              style={{
-                fontFamily: "'Space Grotesk', sans-serif",
-                fontSize: "12px",
-                fontWeight: 700,
-                color: "#0B2D52",
-                minWidth: "48px",
-                textAlign: "center",
-              }}
-            >
-              {currentIndex + 1} / {tours.length}
-            </span>
-            <button
-              onClick={nextMobile}
-              disabled={currentIndex >= mobileMaxIndex}
-              className="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110 disabled:opacity-30"
-              style={{
-                background: "linear-gradient(135deg, #0B2D52, #071830)",
-                border: "1px solid rgba(0,212,232,0.3)",
-                cursor:
-                  currentIndex >= mobileMaxIndex ? "not-allowed" : "pointer",
-              }}
-            >
-              <ChevronRight size={18} style={{ color: "#00D4E8" }} />
-            </button>
-          </div>
         </Reveal>
       </div>
 

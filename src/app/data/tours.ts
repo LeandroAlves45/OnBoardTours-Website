@@ -8,7 +8,8 @@ import type { Boat } from "./boats";
 // É aqui que definimos preço, unidade de preço e capacidade apresentada no modal.
 export interface BoatTourOption {
   boatId: Boat["id"];
-  price: number;
+  price?: number;
+  priceLabel?: string;
   priceUnit: string;
   capacity: string;
 }
@@ -374,6 +375,46 @@ export const sharedTours: Tour[] = [
         boatId: "opo-boat-ii",
         price: 99,
         priceUnit: "per person",
+        capacity: "Up to 10 guests",
+      },
+    ],
+  },
+];
+
+export const premiumTours: Tour[] = [
+  {
+    title: "Douro River Upstream Experience",
+    badge: "Premium",
+    badgeColor: "gold",
+    tags: ["Premium", "5 hours", "Tailor-made"],
+    description:
+      "Sail upstream along the Douro River on a private 5-hour journey tailored to your preferred pace, stops, and onboard experience.",
+    buttonText: "Contact Us",
+    duration: "5 hours",
+    includes: [
+      "Private itinerary planning",
+      "Exclusive boat experience",
+      "Welcome drink",
+      "Tailored onboard service",
+    ],
+    highlights: [
+      "Extended Douro River route",
+      "Personalized schedule",
+      "Ideal for special occasions",
+    ],
+    gradient: "linear-gradient(135deg, #04111E 0%, #0B2D52 55%, #C9A84C 140%)",
+    image: "/OnBoatTours.png",
+    boatOptions: [
+      {
+        boatId: "opo-boat-i",
+        priceLabel: "Contact us",
+        priceUnit: "tailor-made experience",
+        capacity: "Up to 8 guests",
+      },
+      {
+        boatId: "opo-boat-ii",
+        priceLabel: "Contact us",
+        priceUnit: "tailor-made experience",
         capacity: "Up to 10 guests",
       },
     ],
